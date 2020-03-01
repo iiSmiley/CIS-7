@@ -27,13 +27,12 @@ using namespace std; //Library Scope
 
 
 //Function Prototypes
-int* string_to_int_array(string, int option);
+void string_to_int_array(string, int option);
 string string_obtainer();
 bool check_string(string);
 void parity_maker(int*,int);
 void check_parity(int*, int);
-void option1();
-void option2();
+void option(int);
 void menu();
 void display_menu();
 
@@ -65,26 +64,22 @@ int main(int argc, char** argv) {
 }
 
 //Function Implementations
-int* string_to_int_array(string a, int option) {
+void string_to_int_array(string a, int option) {
     //This function converts the string of digits entered by the the user 
     //to an array of integers.
-    int nums[a.length()];
+    int len = a.length();
+    int nums[len];
     
     //Convert from char to integers
-    for(int i=0; i < a.length(); i++) {
+    for(int i=0; i < len; i++) {
         nums[i] =((int)a[i]-48);
     }
-    
-    //Inverting the order of the array to simplify the needed work to use Luhn's algorithms.
-    int len = a.length();
-    int num_str[len];
-    for(int i=0; i < a.length(); i++) {
-        num_str[len-1-i]= nums[i];
-    }
-    (option ==1)? parity_maker(num_str,a.length()) : check_parity(num_str, a.length());
+    //Branch to the right case
+    (option ==1)? parity_maker(nums,len) : check_parity(nums, len);
 };
 
 bool check_string(string a) {
+    //Input validation function (No tolerance for BS entries!)
     bool is_int=true;
     for(int i=0; i<a.length(); i++) {
         if(a[i]< '0' || a[i]> '9') {
@@ -109,11 +104,11 @@ string string_obtainer(){
 
 void check_parity(int* n, int len) {
     int sum = 0;
-    for(int i=1; i<len; i++) {
-        if((2*n[i])>9 && i%2 == 1) {
+    for(int i=len-2; i>=0; i--) {
+        if((2*n[i])>9 && i%2 == (len-2)%2) {
             sum += (2*n[i]-9);
         }
-        else if(2*n[i]<9 && i%2 == 1) {
+        else if(2*n[i]<9 && i%2 == (len-2)%2) {
             sum += (2*n[i]);
         }
         else {
@@ -122,17 +117,17 @@ void check_parity(int* n, int len) {
     }
     sum *= 9;
     int parity = sum%10;
-    (parity==n[0])? cout << "Valid!"<< endl : cout << "Invalid!" << endl;
+    (parity==n[len-1])? cout << "Valid!"<< endl : cout << "Invalid!" << endl;
 };
 
 void parity_maker(int* n,int len){
     int sum = 0;        //Initiating sum
     //Applying Luhn's Algorithm to find the parity digit
-    for(int i=0; i<len; i++) {
-        if((2*n[i])>9 && i%2 == 0) {
+    for(int i=len-1; i>=0; i--) {
+        if((2*n[i])>9 && i%2 == (len-1)%2) {
             sum += (2*n[i]-9);
         }
-        else if(2*n[i]<9 && i%2 == 0) {
+        else if(2*n[i]<9 && i%2 == (len-1)%2) {
             sum += (2*n[i]);
         }
         else {
@@ -141,7 +136,7 @@ void parity_maker(int* n,int len){
     }
     sum *= 9;
     int parity = sum%10;
-    cout << parity << endl;
+    cout << "Parity Digit: " << parity << endl;
 };
 
 void display_menu() {
@@ -166,24 +161,23 @@ void menu() {
         }
         switch(choice)
         {
-            case 1: option1(); //Find the parity
+            case 1: option(choice); //Find the parity
                 break;
-            case 2: option2(); //Check the parity
+            case 2: option(choice); //Check the parity
                 break;
         }
     }
     while(choice != 3);
 };
 
-void option1() {
+void option(int choice) {
     string str;     //The variable str stores a a string obtained from the user
                     //to check for or create the parity number
-    
     do {
         cout << "CC#: ";
         cin >> str;
         if(check_string(str)) {
-            string_to_int_array(str, 1);
+            string_to_int_array(str, choice);
         }
         else {
             cout << "INVALID ENTRY! Please, enter a a valid credit card number." << endl;
@@ -192,19 +186,4 @@ void option1() {
     while(!check_string(str));
 };
 
-void option2() {
-    string str;     //The variable str stores a a string obtained from the user
-                    //to check for or create the parity number
-    
-    do {
-        cout << "CC#: ";
-        cin >> str;
-        if(check_string(str)) {
-            string_to_int_array(str, 2);
-        }
-        else {
-            cout << "INVALID ENTRY! Please, enter a a valid credit card number." << endl;
-        }
-    }
-    while(!check_string(str));
-};
+
