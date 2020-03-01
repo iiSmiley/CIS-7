@@ -105,10 +105,10 @@ string string_obtainer(){
 void check_parity(int* n, int len) {
     int sum = 0;
     for(int i=len-2; i>=0; i--) {
-        if((2*n[i])>9 && i%2 == (len-2)%2) {
+        if((2*n[i])>9 && i%2 == (len)%2) {
             sum += (2*n[i]-9);
         }
-        else if(2*n[i]<9 && i%2 == (len-2)%2) {
+        else if(2*n[i]<9 && i%2 == (len)%2) {
             sum += (2*n[i]);
         }
         else {
@@ -117,6 +117,8 @@ void check_parity(int* n, int len) {
     }
     sum *= 9;
     int parity = sum%10;
+    cout << "Last Digit  : " << n[len-1] << endl;
+    cout << "Parity Digit: " <<parity << endl;
     (parity==n[len-1])? cout << "Valid!"<< endl : cout << "Invalid!" << endl;
 };
 
