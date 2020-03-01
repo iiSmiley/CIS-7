@@ -108,55 +108,38 @@ string string_obtainer(){
 }
 
 void check_parity(int* n, int len) {
-    int num_str[len];
-    for(int i=0; i < len; i++) {
-        num_str[i]= n[i];
-    }
     int sum = 0;
-    for(int i=0; (1+2*i)<len; i++) {
-        if((2*num_str[1+2*i])>9) {
-            num_str[1+2*i] = (2*num_str[1+2*i]-9);
+    for(int i=1; i<len; i++) {
+        if((2*n[i])>9 && i%2 == 1) {
+            sum += (2*n[i]-9);
+        }
+        else if(2*n[i]<9 && i%2 == 1) {
+            sum += (2*n[i]);
         }
         else {
-            num_str[1+2*i] = (2*num_str[1+2*i]);
+            sum += n[i];
         }
     }
-    for(int i=1; i<len; i++) {
-        cout << num_str[i] << endl;
-        sum += num_str[i];
-    }
-    cout << sum << endl;
     sum *= 9;
-    cout << sum << endl;
     int parity = sum%10;
-    (parity==num_str[0])? cout << "Valid!"<< endl : cout << "Invalid!" << endl;
-    if(parity == num_str[0]) {
-    }
-    else {
-    }
+    (parity==n[0])? cout << "Valid!"<< endl : cout << "Invalid!" << endl;
 };
 
 void parity_maker(int* n,int len){
-    int num_str[len];
-    for(int i=0; i < len; i++) {
-        num_str[i]= n[i];
-    }
-    int sum = 0;
-    for(int i=0; (2*i)<len; i++) {
-        if((2*num_str[2*i])>9) {
-            num_str[2*i] = (2*num_str[2*i]-9);
+    int sum = 0;        //Initiating sum
+    //Applying Luhn's Algorithm to find the parity digit
+    for(int i=0; i<len; i++) {
+        if((2*n[i])>9 && i%2 == 0) {
+            sum += (2*n[i]-9);
+        }
+        else if(2*n[i]<9 && i%2 == 0) {
+            sum += (2*n[i]);
         }
         else {
-            num_str[2*i] = (2*num_str[2*i]);
+            sum += n[i];
         }
     }
-    for(int i=0; i<len; i++) {
-        cout << num_str[i] << endl;
-        sum += num_str[i];
-    }
-    cout << sum << endl;
     sum *= 9;
-    cout << sum << endl;
     int parity = sum%10;
     cout << parity << endl;
 };
