@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!--
+  File:   index.html
+  
+  Author: Omar Alkendi
+ 
+  Created on February 29, 2020, 4:46 PM
+  
+  Purpose: Demonstration of Luhn's Algorithms in JavaScript.
+-->
+<html>
+    <head>
+        <title>Alkendi's Demonstration of Luhn's Algorithm</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <script LANGUAGE="JavaScript">
+            function find() {
+                //Variable declaration and initialization
+                var cc  = document.demo.cc_find.value;
+                var ccn = Array.from(String(cc), Number);  //Convert the string of digits to an array of digits (Does not work on IE!)
+                var len = ccn.length;           //length of the digits array
+                var sum = 0;                    //The needed sum to find the parity digit
+                var parity = 0;
+                
+                //Begon the summation process
+                for(var i = len-1; i>=0; i--){
+                    if(2*ccn[i]>9 && i%2 === (len-1)%2) {
+                        sum += (2*ccn[i]-9)
+                    }
+                    else if(2*ccn[i] <9 && (len-1)%2) {
+                        sum += (2*ccn[i]);
+                    }
+                    else {
+                        sum += ccn[i]*1;
+                    }
+                }
+                
+                sum *= 9;
+                parity = sum%10;
+                document.getElementById("pd").innerHTML = parity;
+                document.getElementById("ccnp").innerHTML = cc+parity;
+            }
+            
+            function check() {
+                //Variable declaration and initialization
+                var cc  = document.demo.cc_check.value;
+                var ccn = Array.from(String(cc), Number);  //Convert the string of digits to an array of digits (Does not work on IE!)
+                var len = ccn.length;           //length of the digits array
+                var sum = 0;                    //The needed sum to find the parity digit
+                var parity = 0;
+                
+                //Begon the summation process
+                for(var i = len-2; i>=0; i--){
+                    if(2*ccn[i]>9 && i%2 === (len)%2) {
+                        sum += (2*ccn[i]-9)
+                    }
+                    else if(2*ccn[i] <9 && (len)%2) {
+                        sum += (2*ccn[i]);
+                    }
+                    else {
+                        sum += ccn[i]*1;
+                    }
+                }
+                
+                sum *= 9;
+                parity = sum%10;
+                
+                if(ccn[len-1] === parity) {
+                    alert("Valid!");
+                    document.getElementById("status").innerHTML = "Valid";
+                }
+                else {
+                    document.getElementById("status").innerHTML = "Invalid";
+                }
+            }
+        </script>
+        <form id="demo" name="demo" method=POST action="javascript:void(0)">
+            <h1>Finding The Parity Digit</h1>
+            <p>Account or CC#: <input type="number" name="cc_find" size="50" value="7992739871">
+                <input type="submit" value="Find" onclick="find()"> </p>
+            
+            <b>The Parity Digit: </b><i id="pd"></i><br>
+            <b>The New Account#: </b> <i id="ccnp"></i><br>
+            
+            <h1>Checking The Parity Digit</h1>
+            <p>Account or CC#: <input type="number" name="cc_check" size="50" value="79927398713">
+                <input type="submit" value="Check" onclick="check()"> </p>
+            
+            <b>Status: </b><i id="status"></i><br>
+        </form>
+        <div></div>
+    </body>
+</html>
