@@ -24,10 +24,10 @@
                 var sum = 0;                    //The needed sum to find the parity digit
                 var parity = 0;
                 
-                //Begon the summation process
+                //Begin the summation process
                 for(var i = len-1; i>=0; i--){
                     if(2*ccn[i]>9 && i%2 === (len-1)%2) {
-                        sum += (2*ccn[i]-9)
+                        sum += (2*ccn[i]-9);
                     }
                     else if(2*ccn[i] <9 && i%2 === (len-1)%2) {
                         sum += (2*ccn[i]);
@@ -51,10 +51,10 @@
                 var sum = 0;                    //The needed sum to find the parity digit
                 var parity = 0;
                 
-                //Begon the summation process
+                //Begin the summation process
                 for(var i = len-2; i>=0; i--){
                     if(2*ccn[i]>9 && i%2 === (len)%2) {
-                        sum += (2*ccn[i]-9)
+                        sum += (2*ccn[i]-9);
                     }
                     else if(2*ccn[i] <9 && i%2 === (len)%2) {
                         sum += (2*ccn[i]);
