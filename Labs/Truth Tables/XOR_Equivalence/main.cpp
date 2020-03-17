@@ -24,13 +24,13 @@ const bool q[] = {true, false, true, false};
 int main() {
     
     //Display the outputs
-    cout << "!((p&&q)||~(p||q)) = p^q" << endl;   
+    cout << "(p&&q)||~(p||q) = !(p^q)" << endl;   
     for(int i=0; i < 4; i++){
-        if(!((p[i] && q[i]) || !(p[i] || q[i]))) {
-            cout << "         T            ";
+        if((p[i] && q[i]) || !(p[i] || q[i])) {
+            cout << "         T              ";
         }
         else{
-            cout << "         F            ";
+            cout << "         F              ";
         }
         
         if(p[i] ^ q[i]) {
