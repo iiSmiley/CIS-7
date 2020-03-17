@@ -26,7 +26,7 @@ private:
     string  type;
     int     len;
     int*    ccNum;
-    int luhn();
+    int     luhn();
 };
 
 #endif /* CC_H */
