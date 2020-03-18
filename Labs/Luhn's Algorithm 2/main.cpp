@@ -28,8 +28,8 @@ int main(int argc, char** argv) {
         (a.check())? valid++ : invalid++;
     }
     
-    cout << "Valid after flips   : " << valid << endl;
-    cout << "Invalid after flips : " << invalid << endl;
+    cout << "Valid after flipping   : " << valid << endl;
+    cout << "Invalid after flipping : " << invalid << endl;
     cout << "Valid Percentage  : " << (valid/ITER)*100 << "%" << endl;
     cout << "Invalid Percentage: " << (invalid/ITER)*100 << "%" << endl;
     return 0;
