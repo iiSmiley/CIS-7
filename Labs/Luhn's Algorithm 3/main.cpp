@@ -12,8 +12,8 @@
 #include "CC.h"
 
 //Global Constants
-const int ITER = 1000000;
-const int N = 20;
+const int ITER = 10000;
+const int N = 10;
 
 int main(int argc, char** argv) {
     
@@ -36,10 +36,11 @@ int main(int argc, char** argv) {
     cout << "Invalid Percentage: " << (invalid/ITER)*100 << "%" << endl;
     */
     
-    cout << "\nTransposing Stats!" << endl; 
+    valid = invalid = 0;
+    cout << "\nTransposing Stats! (Including the Parity Digit)" << endl; 
     for(int j=0; j < N; j++){
         //Recycle the variables
-        valid = invalid = 0;
+        //valid = invalid = 0;
         for(int i = 0; i < ITER; i++) {
             CC a;
             //cout << fixed << left << setw(6) << setprecision(2) << i+1;
@@ -47,10 +48,32 @@ int main(int argc, char** argv) {
             a.transpose();
             (a.check())? valid++ : invalid++;
         }
+        cout << "N= " << j+1 << "|Valid Percentage  : " << (valid/ITER)*(100/(j+1)) << "%" << endl;
+        cout << "N= " << j+1 << "|Invalid Percentage: " << (invalid/ITER)*(100/(j+1)) << "%" << endl << endl;
     }
     cout << "Ave. Valid after transposing   : " << valid/N << endl;
     cout << "Ave. Invalid after transposing : " << invalid/N << endl;
-    cout << "Ave. Valid Percentage  : " << (valid/ITER)*100 << "%" << endl;
-    cout << "Ave. Invalid Percentage: " << (invalid/ITER)*100 << "%" << endl;
+    cout << "Ave. Valid Percentage  : " << (valid/ITER)*(100/N) << "%" << endl;
+    cout << "Ave. Invalid Percentage: " << (invalid/ITER)*(100/N) << "%" << endl;
+    
+    valid = invalid = 0;
+    cout << "\nTransposing Stats! (Excluding the Parity Digit)" << endl; 
+    for(int j=0; j < N; j++){
+        //Recycle the variables
+        //valid = invalid = 0;
+        for(int i = 0; i < ITER; i++) {
+            CC a;
+            //cout << fixed << left << setw(6) << setprecision(2) << i+1;
+            //a.display();
+            a.transposeV2();
+            (a.check())? valid++ : invalid++;
+        }
+        cout << "N= " << j+1 << "|Valid Percentage  : " << (valid/ITER)*(100/(j+1)) << "%" << endl;
+        cout << "N= " << j+1 << "|Invalid Percentage: " << (invalid/ITER)*(100/(j+1)) << "%" << endl << endl;
+    }
+    cout << "Ave. Valid after transposing   : " << valid/N << endl;
+    cout << "Ave. Invalid after transposing : " << invalid/N << endl;
+    cout << "Ave. Valid Percentage  : " << (valid/ITER)*(100/N) << "%" << endl;
+    cout << "Ave. Invalid Percentage: " << (invalid/ITER)*(100/N) << "%" << endl;
     return 0;
 }

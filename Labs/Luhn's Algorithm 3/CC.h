@@ -22,7 +22,7 @@ public:
     void display();         //Display Credit Card information
     void double_flip();
     void transpose();
-    
+    void transposeV2();
     virtual ~CC();
 private:
     string  type;

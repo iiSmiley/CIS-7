@@ -172,7 +172,6 @@ void CC::transpose() {
     int first  = 0;
     int second = 0;
     int temp   = 0;
-    bool exit  = false;
     
     do {
         first  = rand()%this->len;
@@ -183,9 +182,26 @@ void CC::transpose() {
             //swap!
             this->ccNum[first] = this->ccNum[second];
             this->ccNum[second] = temp;
-            exit = true;
-            //cout << "Done transposing " << first+1 << " and " << second+1 << endl;
         }
     }
-    while(!exit);
+    while(first == second);
+}
+
+void CC::transposeV2() {
+    int first  = 0;
+    int second = 0;
+    int temp   = 0;
+    
+    do {
+        first  = rand()%(this->len-1);
+        second = rand()%(this->len-1);
+        
+        if(first != second) {
+            temp = this->ccNum[first];
+            //swap!
+            this->ccNum[first] = this->ccNum[second];
+            this->ccNum[second] = temp;
+        }
+    }
+    while(first == second);
 }
