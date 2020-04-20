@@ -20,14 +20,17 @@ using namespace std;    //Library Scope
 
 class MM {
 public:
-    MM();               //Default constructor
-    MM(const MM& orig); //Copy constructor
-    virtual ~MM();      //Destructor
+    MM();                       //Default constructor
+    MM(const MM& orig);         //Copy constructor
+    MM(const int&, const bool&);//Secondary constructor
+    virtual ~MM();              //Destructor
     void     display();
     void     parseGuess(string);
     bool     isCodeBroken();
+    void     setLength(const int&);
 private:
     int     length;
+    bool    duplicateOk;
     int*    code;
     bool    codeStatus;
     void    display_results(int corrLoc, int incorrLoc);

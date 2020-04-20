@@ -10,34 +10,66 @@
  */
 #include "MM.h"
 
+//Default constructor
 MM::MM() {
-    this->length     = 4;
-    this->code       = new int[this->length];
-    this->codeStatus = false;
+    this->length        = 4;
+    this->code          = new int[this->length];
+    this->codeStatus    = false;
+    this->duplicateOk   = true;
 
     for(int i = 0; i < this->length ; i++) {
         this->code[i] = (rand()%10);
     }
 }
 
+//Copy constructor
 MM::MM(const MM& orig) {
-    this->length     = orig.length;
-    this->code       = new int[this->length];
-    this->codeStatus = orig.codeStatus;
+    this->length        = orig.length;
+    this->code          = new int[this->length];
+    this->codeStatus    = orig.codeStatus;
+    this->duplicateOk   = orig.duplicateOk;
     
+    //Populate the code array (Create the code)
     for(int i = 0; i < this->length ; i++) {
         this->code[i] = orig.code[i];
     }
 }
 
+//Secondary constructor
+MM::MM(const int& length, const bool& duplicateOk) {
+    this->length        = length;
+    this->code          = new int[this->length];
+    this->codeStatus    = false;
+    this->duplicateOk   = duplicateOk;
+    
+    //Populate the code array (Create the code)
+    for(int i = 0; i < this->length ; i++) {
+        this->code[i] = (rand()%10);
+        
+        //If duplicate is not allowed, then check for duplicates.
+        if(i>0 && !duplicateOk) {
+            for(int j = i-1; j >= 0; j--) {
+                if(this->code[i] == this->code[j]) {
+                    i--;
+                }
+            }
+        }
+    }
+}
+
+//Destructor
 MM::~MM() {
+    //Delete the data from memory
     delete this->code;
+    //Deallocate the pointer
     this->code = NULL;
 }
+
 
 void MM::display() {
     cout << "The random code to break: ";
     
+    //Displaying the code in X X X X pattern
     for(int i = 0; i < this->length ; i++) {
         cout << this->code[i] << " ";
     }
