@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=BlooomFilter_2Hashes
+PROJECTNAME=BloomFilter_2Hashes
 
 # Active Configuration
 DEFAULTCONF=Debug
